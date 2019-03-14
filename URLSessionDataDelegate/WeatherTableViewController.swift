@@ -68,14 +68,14 @@ class WeatherTableViewController: UITableViewController, URLSessionDataDelegate 
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath)
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell", for: indexPath);
 
         // Configure the cell...
         let day: Day = days[indexPath.row];
         cell.textLabel!.text = formatter.string(from: day.date);
         cell.detailTextLabel!.text = "\(day.temperature)° F";
         cell.imageView!.image = UIImage(named: day.icon)!;
-        return cell
+        return cell;
     }
     
     // MARK: - Protocol URLSessionDataDelegate
@@ -101,7 +101,7 @@ class WeatherTableViewController: UITableViewController, URLSessionDataDelegate 
         print("response.expectedContentLength = \(response.expectedContentLength)");
         print();
         
-        guard (200 ... 299).contains(response.statusCode) else {
+        guard (200 ..< 300).contains(response.statusCode) else {
             print("urlSession(_:dataTask:didReceive:completionHandler) received statusCode \(response.statusCode)");
             completionHandler(.cancel);
             return;
@@ -170,15 +170,4 @@ class WeatherTableViewController: UITableViewController, URLSessionDataDelegate 
             self.tableView.reloadData();
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
